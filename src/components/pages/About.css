@@ -26,173 +26,54 @@ section {
     flex: auto;
 }
 
-/* Rate Limit Diagnostic Box */
-.diagnostic-box {
-    margin: 40px 20px;
-    padding: 20px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    background-color: #f9fafb;
-    font-family: monospace;
-}
-
-.diagnostic-box h3 {
-    margin-top: 0;
-    color: #374151;
-    text-align: center;
-}
-
-.diagnostic-info {
+/* Rate Limit Reset Button */
+.rate-limit-reset {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.diagnostic-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 0;
-}
-
-.diagnostic-label {
-    font-weight: bold;
-    color: #6b7280;
-}
-
-.diagnostic-value {
-    color: #111827;
-}
-
-.diagnostic-value.status-ok {
-    color: #10b981;
-    font-weight: bold;
-}
-
-.diagnostic-value.status-rate-limited {
-    color: #ef4444;
-    font-weight: bold;
-}
-
-.diagnostic-value.status-error {
-    color: #ef4444;
-    font-weight: bold;
-}
-
-.diagnostic-value.status-reset {
-    color: #3b82f6;
-    font-weight: bold;
-}
-
-.diagnostic-value.status-cached {
-    color: #10b981;
-    font-weight: bold;
-}
-
-.diagnostic-controls {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
     justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 30px 0;
+    padding: 20px;
 }
 
-.diagnostic-btn {
-    padding: 8px 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    background-color: white;
-    color: #374151;
+.reset-btn {
+    padding: 10px 20px;
+    border: 2px solid #006EFF;
+    border-radius: 8px;
+    background-color: #006EFF;
+    color: white;
     cursor: pointer;
     font-size: 14px;
-    transition: all 0.2s ease;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-.diagnostic-btn:hover:not(:disabled) {
-    background-color: #f3f4f6;
-    border-color: #9ca3af;
+.reset-btn:hover:not(:disabled) {
+    background-color: #0056CC;
+    border-color: #0056CC;
+    transform: translateY(-2px);
 }
 
-.diagnostic-btn:disabled {
-    opacity: 0.5;
+.reset-btn:disabled {
+    opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
 }
 
-.diagnostic-btn.soft-fetch {
-    background-color: #10b981;
-    color: white;
-    border-color: #10b981;
-}
-
-.diagnostic-btn.soft-fetch:hover:not(:disabled) {
-    background-color: #059669;
-}
-
-.diagnostic-btn.hard-fetch {
-    background-color: #3b82f6;
-    color: white;
-    border-color: #3b82f6;
-}
-
-.diagnostic-btn.hard-fetch:hover:not(:disabled) {
-    background-color: #2563eb;
-}
-
-.diagnostic-btn.reset-limits {
-    background-color: #ef4444;
-    color: white;
-    border-color: #ef4444;
-}
-
-.diagnostic-btn.reset-limits:hover:not(:disabled) {
-    background-color: #dc2626;
-}
-
-.diagnostic-log {
-    border-top: 1px solid #d1d5db;
-    padding-top: 16px;
-}
-
-.diagnostic-log h4 {
-    margin: 0 0 12px 0;
-    color: #374151;
+.reset-status {
     font-size: 14px;
-}
-
-.log-entries {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.log-entry {
-    padding: 4px 8px;
-    background-color: #f3f4f6;
+    font-weight: bold;
+    padding: 8px 12px;
     border-radius: 4px;
-    font-size: 12px;
-    color: #6b7280;
-}
-
-.log-entry:last-child {
-    background-color: #dbeafe;
-    color: #1d4ed8;
+    background-color: #f3f4f6;
 }
 
 @media (max-width: 768px) {
-    .diagnostic-box {
-        margin: 20px 10px;
+    .rate-limit-reset {
+        flex-direction: column;
+        gap: 8px;
+        margin: 20px 0;
         padding: 15px;
-    }
-    
-    .diagnostic-controls {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .diagnostic-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
     }
 }
 

@@ -19,19 +19,12 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Fetch ETH price from our backend (single call for all properties)
+    // Fetch ETH price from backend - backend handles all caching
     const fetchETHPrice = async () => {
         try {
             const response = await fetch('http://localhost:3001/api/eth-price');
             
             if (!response.ok) {
-                // Handle rate limiting specifically - don't overwrite cached data
-                if (response.status === 429) {
-                    console.log('Rate limited - using cached prices');
-                    // Don't set error state, keep existing prices
-                    setLoading(false);
-                    return;
-                }
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
@@ -42,10 +35,7 @@ const Home = () => {
             
         } catch (err) {
             console.error('Error fetching ETH price:', err);
-            // Only set error if we don't have cached prices
-            if (ethPrice === null) {
-                setError('Failed to fetch ETH price');
-            }
+            setError('Failed to fetch ETH price');
         } finally {
             setLoading(false);
         }

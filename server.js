@@ -8,7 +8,8 @@ let priceCache = {
   price: null,
   lastUpdated: null,
   up: false,
-  cacheExpiry: null
+  cacheExpiry: null,
+  dataSource: null
 };
 
 // Rate limiting map (in production, use Redis or similar)
@@ -31,7 +32,7 @@ const getCurrentETHPrice = async () => {
     const currentPrice = data.ethereum.usd;
     
     console.log(`Fetched current ETH price: $${currentPrice}`);
-    return currentPrice;
+    return { price: currentPrice, dataSource: 'coingecko' };
     
   } catch (error) {
     console.error('Error fetching ETH price from CoinGecko:', error);
@@ -39,7 +40,7 @@ const getCurrentETHPrice = async () => {
     // Fallback to cached price or default if API fails
     if (priceCache.price) {
       console.log('Using cached ETH price as fallback');
-      return priceCache.price;
+      return { price: priceCache.price, dataSource: 'cache_fallback' };
     }
     throw error;
   }
@@ -60,11 +61,6 @@ const simulatePriceChange = (currentPrice) => {
 
 // Rate limiting middleware
 const rateLimiter = (req, res, next) => {
-  // Skip rate limiting for the clear-rate-limits endpoint
-  if (req.path === '/api/clear-rate-limits') {
-    return next();
-  }
-  
   const clientIP = req.ip || req.connection.remoteAddress;
   const now = Date.now();
   const windowMs = 60 * 1000; // 1 minute
@@ -114,12 +110,13 @@ app.get('/api/eth-price', async (req, res) => {
       return res.json({
         price: priceCache.price,
         lastUpdated: priceCache.lastUpdated,
-        up: priceCache.up
+        up: priceCache.up,
+        dataSource: 'cache'
       });
     }
     
     // Get current price and simulate change
-    const currentPrice = await getCurrentETHPrice();
+    const { price: currentPrice, dataSource } = await getCurrentETHPrice();
     const { price: newPrice, up } = simulatePriceChange(currentPrice);
     
     // Update cache
@@ -127,13 +124,15 @@ app.get('/api/eth-price', async (req, res) => {
       price: newPrice,
       lastUpdated: new Date().toISOString(),
       up: up,
-      cacheExpiry: now + 6000 // 6 seconds
+      cacheExpiry: now + 6000, // 6 seconds
+      dataSource: dataSource
     };
     
     res.json({
       price: priceCache.price,
       lastUpdated: priceCache.lastUpdated,
-      up: priceCache.up
+      up: priceCache.up,
+      dataSource: dataSource
     });
     
   } catch (error) {
