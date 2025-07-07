@@ -1,0 +1,145 @@
+:root {
+  --blue: #006EFF;
+  --darkBlue: #12417E;
+}
+
+.property {
+  width: 100%;
+  max-width: 380px;
+  min-width: 280px;
+  border-radius: 12px;
+  box-shadow: 8px 8px rgba(0,0,0,.1);
+  height: fit-content;
+  overflow: hidden;
+}
+
+.property-image {
+  border-radius: 12px 12px 0 0;
+}
+.property-image img {
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+  display: block;
+}
+
+.property h3, .property p{
+  margin: 0;
+}
+
+.property-details {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 16px;
+}
+
+.property-details-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.property-details-2-l h3 {
+  text-align: left;
+}
+
+
+.property-details-2-r h3 {
+  text-align: right;
+}
+
+.property-details-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.profit {
+  color: var(--blue);
+}
+
+.profitability {
+  color: lightGray;
+}
+
+.invest-button {
+  padding: 12px 32px;
+  border: 0;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  background-color: var(--blue);
+  cursor: pointer
+}
+
+/* Property Price Display Styles */
+.property-price-info {
+  margin: 8px 0;
+}
+
+.property-usd-price {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 4px 0;
+  transition: color 0.3s ease;
+}
+
+.property-eth-amount {
+  font-size: 0.9em;
+  color: #666;
+  margin: 2px 0;
+}
+
+/* ETH Price Tracking Styles */
+.eth-price-info {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.eth-current-price {
+  font-size: 12px;
+  color: #333;
+  margin: 2px 0;
+}
+
+.price-indicator {
+  font-size: 11px;
+  font-weight: bold;
+  margin: 4px 0;
+}
+
+.price-up {
+  color: #22c55e;
+}
+
+.price-down {
+  color: #ef4444;
+}
+
+.loading-text {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+.error-text {
+  font-size: 12px;
+  color: #ef4444;
+  font-style: italic;
+}
+
+/* Dynamic background colors for price changes */
+.property.price-up-bg {
+  background-color: rgba(34, 197, 94, 0.8);
+  transition: background-color 0.3s ease;
+}
+
+.property.price-down-bg {
+  background-color: rgba(239, 68, 68, 0.8);
+  transition: background-color 0.3s ease;
+}
+
+.property {
+  transition: background-color 0.3s ease;
+}
